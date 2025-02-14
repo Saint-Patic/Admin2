@@ -2,4 +2,4 @@
 
 Groupe : 2TL2-1
 
-Alexis DEMARCQ, Nathan LEMAIRE et Quentin HENRARD
+Alexis DEMARCQ (Saint-Patic), Nathan LEMAIRE (Akanaifu) et Quentin HENRARD (Salfahin)
