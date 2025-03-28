@@ -8,12 +8,9 @@ $TTL 86400
                         604800     ; expire after 1 week
                         86400 )    ; minimum TTL of 1 day
 
-        IN      NS      ns.l2-1.ephec-ti.be.
 
-@    IN    NS    ns.l2-1.ephec-ti.be. 
-@    IN    A     54.36.182.244
+@       IN      NS      ns.l2-1.ephec-ti.be.
+@       IN      A       54.36.182.244
 
-www     IN      A       54.36.182.244
 ns      IN      A       54.36.182.244
-blog	IN      CNAME	www
-
+www     IN      A       54.36.182.244
