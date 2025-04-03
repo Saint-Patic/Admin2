@@ -1,8 +1,6 @@
-FROM internetsystemsconsortium/bind9:9.18
+FROM ubuntu/bind9:9.18-22.04_beta
 
-ADD named.conf /etc/bind/named.conf
-ADD l2-1.zone /etc/bind/l2-1.zone
-RUN chown -R bind:bind /etc/bind/
-
-CMD ["/usr/sbin/named", "-g", "-c", "/etc/bind/named.conf", "-u", "bind"]
-
+COPY named.conf /etc/bind/named.conf
+COPY l2-1.zone /etc/bind/zone/l2-1.zone
+RUN chown -R bind:bind /etc/bind/zone && \
+    chmod -R 770 /etc/bind/zone
