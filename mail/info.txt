@@ -1,0 +1,2 @@
+nom dns actuel : vps-ed46046a.vps.ovh.net
+nom souhaite : mail.l2-1.ephec-ti.be

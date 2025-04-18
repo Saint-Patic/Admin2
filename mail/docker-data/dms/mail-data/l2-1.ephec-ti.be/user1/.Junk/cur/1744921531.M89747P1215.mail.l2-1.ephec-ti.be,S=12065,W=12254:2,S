@@ -1,0 +1,189 @@
+Return-Path: <a.demarcq@students.ephec.be>
+Delivered-To: user1@l2-1.ephec-ti.be
+Received: from mail.l2-1.ephec-ti.be
+	by mail.l2-1.ephec-ti.be with LMTP
+	id QVM1BbtjAWi/BAAA1srq+w
+	(envelope-from <a.demarcq@students.ephec.be>)
+	for <user1@l2-1.ephec-ti.be>; Thu, 17 Apr 2025 20:25:31 +0000
+Received: from localhost (localhost [127.0.0.1])
+	by mail.l2-1.ephec-ti.be (Postfix) with ESMTP id 06AF142A55
+	for <user1@l2-1.ephec-ti.be>; Thu, 17 Apr 2025 20:25:31 +0000 (UTC)
+X-Quarantine-ID: <ZPfEj6DnFRwB>
+X-Spam-Flag: YES
+X-Spam-Score: 996.186
+X-Spam-Level: ****************************************************************
+X-Spam-Status: Yes, score=996.186 tagged_above=2 required=6.31
+ tests=[ARC_SIGNED=0.001, ARC_VALID=-0.1, AXB_X_FF_SEZ_S=1, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, GTUBE=1000, HTML_MESSAGE=0.001, RCVD_IN_MSPIKE_H2=-1,
+ RCVD_IN_VALIDITY_CERTIFIED=-3, RCVD_IN_VALIDITY_RPBL=1.284,
+ RCVD_IN_VALIDITY_SAFE=-2, SPF_HELO_NONE=0.001, SPF_PASS=-0.001]
+ autolearn=no autolearn_force=no
+Authentication-Results: mail.l2-1.ephec-ti.be; dmarc=none (p=none dis=none) header.from=students.ephec.be
+Authentication-Results: mail.l2-1.ephec-ti.be;
+	dkim=pass (1024-bit key; unprotected) header.d=ephec.onmicrosoft.com header.i=@ephec.onmicrosoft.com header.a=rsa-sha256 header.s=selector2-ephec-onmicrosoft-com header.b=TE5ceWDU;
+	dkim-atps=neutral
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=52.102.174.60; helo=pa4pr04cu001.outbound.protection.outlook.com; envelope-from=a.demarcq@students.ephec.be; receiver=l2-1.ephec-ti.be 
+Received: from PA4PR04CU001.outbound.protection.outlook.com (mail-francecentralazhn15013060.outbound.protection.outlook.com [52.102.174.60])
+	by mail.l2-1.ephec-ti.be (Postfix) with ESMTPS id 7C4F6429AE
+	for <user1@l2-1.ephec-ti.be>; Thu, 17 Apr 2025 20:25:29 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=bf0aW7h8HfNznmKWz5V/tnk95rXiGvhb6toF2Df2wE29+8/v6FsunXX5v532sN0/Ouo/ZB6o2dOT0RuSN4LlI+1cZoqsnkx/FYacPAS5+sfjPyJDnfm2rdAJQ6emZGsQQvJBjtX2u9/aL9KylvoOjJhlf/gt2NB/JT9KoRRNdLVNSPrHjOvh1gWvtEF06Csvcul1As8qIYlBvW/vnejC6L2vnvf3XYC2gNTbyILEY87LC+tvVtKNYb3h/YMGKR8aFDYgL3n6YFjDI7VDRO1nUO6dknSU2KOY+dAi+meWELD+4ky4c/LzeGAr553Cl771kOUI8Q3qiGq6hqDnPHyNfA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=g5zasCJxnEDGhLlAMNzTcN7wmS7AZoM2WbF/ru6Qz9A=;
+ b=wU7Sjd1UoOIQ339gUoAaH0KYaPzsnMoGZZ8zTpHSkwmILzCOVAsSThYai9Vf+0x9YbUFqjX3+8bphFmVgCP0GvGONPjzvt6MgvwWBR8UEQvDIn8cLdHXkHj/CRqjRAbeUjgsn9Wx/Vro0NqO/Sj2TswCOpFd+4NBfEewvIwJrVLrn9cE7geDU2h3xaoyPQOvHfUhhI1raPVWdHvfsm+voU6nNT6vRzTsi/MAX+nkfk1tBh7e7w5jqBliZZU9iXuWtgxFQYoO0bvEd+JnsEatGnu7XjlJap6nbIhh2KcdK6zUeBQg4bZtLqDdhFal/8oXLIkqySyV5Iyxhi4q14iKJg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=students.ephec.be; dmarc=pass action=none
+ header.from=students.ephec.be; dkim=pass header.d=students.ephec.be; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ephec.onmicrosoft.com;
+ s=selector2-ephec-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=g5zasCJxnEDGhLlAMNzTcN7wmS7AZoM2WbF/ru6Qz9A=;
+ b=TE5ceWDUOZP9KE9x5ahrsJK9FIVsr7iz8E7WQFSPxtGYwv98nf2v/pNw6PKXkZSDXBMV7uejV2S3OHkKea6jw5UqYT1d86nUy57cTC7avKM3L5nN0KkFsivoQidgYOyDnNSmn1GB5MQPk/8F482SaZ5cEW4jV22NUa0yduUJp9o=
+Received: from PAXPR05MB7903.eurprd05.prod.outlook.com (2603:10a6:102:15b::19)
+ by GVXPR05MB10895.eurprd05.prod.outlook.com (2603:10a6:150:115::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8655.18; Thu, 17 Apr
+ 2025 20:25:20 +0000
+Received: from PAXPR05MB7903.eurprd05.prod.outlook.com
+ ([fe80::24a5:15ed:3f56:7e5d]) by PAXPR05MB7903.eurprd05.prod.outlook.com
+ ([fe80::24a5:15ed:3f56:7e5d%5]) with mapi id 15.20.8655.014; Thu, 17 Apr 2025
+ 20:25:20 +0000
+From: DEMARCQ Alexis <a.demarcq@students.ephec.be>
+To: "user1@l2-1.ephec-ti.be" <user1@l2-1.ephec-ti.be>
+Subject: Test spam mail (GTUBE)
+Thread-Topic: Test spam mail (GTUBE)
+Thread-Index: AQHbr9bRiqG4G0bXt0OaTNdhfNR90g==
+Date: Thu, 17 Apr 2025 20:25:19 +0000
+Message-ID:
+ <PAXPR05MB790320FC090832CE6E682462BEBC2@PAXPR05MB7903.eurprd05.prod.outlook.com>
+Accept-Language: fr-FR, en-US
+Content-Language: fr-FR
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+msip_labels:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=students.ephec.be;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: PAXPR05MB7903:EE_|GVXPR05MB10895:EE_
+x-ms-office365-filtering-correlation-id: cf98f98e-1895-4e6b-f3af-08dd7dedf955
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;ARA:13230040|218001;
+x-microsoft-antispam-message-info:
+ =?iso-8859-1?Q?1waM3u5ViidhD0Y/vr8GBdABFstLMGcPPVesR0SQ0XtwzI+KT1GFuYp5qa?=
+ =?iso-8859-1?Q?QJTa1GWGTXNc8C7M+C1DR5b059r/VPHgPdt9Pc2j+/y/jXC9oeThDxco3w?=
+ =?iso-8859-1?Q?O48ckwq34fUcnYD7iexBX0Z+YD0aenQ2GgZ+fwvOdhtGr2m1wXFwpMv9PZ?=
+ =?iso-8859-1?Q?3BlcSTjCJWlH9I9WzJYhfNQo6rKJrlOk5CvOzBsjxHM0LeeVb/bkF82iMZ?=
+ =?iso-8859-1?Q?AoqkRGivHMJq390D1APb1WIXLy53fvVkgX0mObSsQDj9/vUnlaFPRyCn8Q?=
+ =?iso-8859-1?Q?f1y+5cb6frb/qRvNzJa6qtp/f2KH1Il+9xxoSblBR78E9YUMdn7f5V3l+7?=
+ =?iso-8859-1?Q?f3Jl7pj0EZE8Ob5QyK1JsqaouItXOEZVQVObpdskOolLyyWOtb6H3Cv0KF?=
+ =?iso-8859-1?Q?YyidJ/C9eaHXztE9BZUQKFG8+dbGlZUKgevb6JOpSlN4RzlTucOF1ejBeL?=
+ =?iso-8859-1?Q?v8XvJj6ij3IA6cjcFahgV2+d1wuQRmrcVJHBdP9NrvqWgCFrQOiMBxWLNC?=
+ =?iso-8859-1?Q?ViF7lexuBWuBGjEa5M3d43qVlf4TqG4iLURAk9FoTNzaPpcA/DvBgXD6tk?=
+ =?iso-8859-1?Q?kUDfM6inUy3xDUx7XV723xSJOe10cc4AvB8wJ3oh9a/YHcfWbUYKYfMun6?=
+ =?iso-8859-1?Q?UK0OG6poNvs6Aa1KrAm81poZDsukPdD04X53QXR/kRzF6/J2sRsat0fAT3?=
+ =?iso-8859-1?Q?aeljSOwsiBiKDsNL9rsmblNDAV7ZO0T7EMasmmPil0Ad/tzMYXIQ+LUUGK?=
+ =?iso-8859-1?Q?4XzcvRBrf46ylmo/N5tFZJS306xDIaStU9LNB5IY1yK4udOjYbywpgcgH9?=
+ =?iso-8859-1?Q?K/1QD2d0TB5m2FqkdM/wuxTbNWVuO8pPhWNdbCKe07b0IDRVIuX/esmXCE?=
+ =?iso-8859-1?Q?9k4NnWJEI5rA4tRruSFaCfpFK9JTq5xyF3Er96AlabK9C2KeLOdsTAwCWo?=
+ =?iso-8859-1?Q?wQxSIHW9Ybq7uM7OxEBtIWBAWS+pYxw2V3nyCDaVKaCkIAJ2V4B/gWs+WD?=
+ =?iso-8859-1?Q?fumbnWXu9RZaYR0Cnyr2DV7R38dGq4akdsvyidqxNWunvP0hW8mRHVYFUm?=
+ =?iso-8859-1?Q?FxwX+TLWCi04PH19TWgD4Bk8qSZjL5i3XmdfKl2TGCkyCyl45/CtMUiLF+?=
+ =?iso-8859-1?Q?BgMNkCbQ7AYP63hYd3pLMUf32XkVEU48K+as82WP6gB8faO+7omTPUzU/R?=
+ =?iso-8859-1?Q?zIxKFLoNfhfS4EQ5L6jxe2IB39XijXYfraPIP9pvp3VXDtcWCYmlbhVuN4?=
+ =?iso-8859-1?Q?eXkajXmMhWdz5fdjT62EOZ2AG/xv5i+RPbtsZvnVcoNwalJpGDduM4W+fE?=
+ =?iso-8859-1?Q?r218XliYUtYpSkVQL6v73y6M2wDz9AKefGJ4CYa0X4YfGaSriZrioS3378?=
+ =?iso-8859-1?Q?/a+Gztg/KUa5COsUtGdu8Q2CE+et1LCe1spM1g7Aa7rkA6nK6WWXHiCoFl?=
+ =?iso-8859-1?Q?KNBwb0Lj16UyEcQeq7A5JsRhPlcZEHivvzjAf99Mjo2XTAXZGdjjviEPd0?=
+ =?iso-8859-1?Q?qMAOeLN3RhOJfOYP3v4Hroey/78SZ2ZsWTXLC7Vk7G8XXMevugUoUQ3Ije?=
+ =?iso-8859-1?Q?zaxd0wVItcLitcyQnkIFyoBG35+X0Bh7Csrg2iNTqwADe74RcugK2w4r/S?=
+ =?iso-8859-1?Q?qtKhDmjHqbdu5yghiA+R0cYeJj6IwgEk58uhRxjk3W2lfZ6rGReN+riY4G?=
+ =?iso-8859-1?Q?0a7iRO9mQb7HDLTFv9SvlUDysKzdOy+ZEgaZ4PtUqgeN8/1Qjcew43PVpz?=
+ =?iso-8859-1?Q?ubGDKZGPH+Sfhmfh8bNqMBTgFsRIcQXl+OL56Zr5vb2NnN3me/rTWGZlzT?=
+ =?iso-8859-1?Q?UtppM/rokYxDAVIiZQqhgoAHWy6FtevU+UmBlOIk02WuTNffi2ndVg4/d9?=
+ =?iso-8859-1?Q?x0foILPseubF0SeCliNdCCRdEvpHM1ORljAhP+dNmtQmKzOgR1sc13epJH?=
+ =?iso-8859-1?Q?YCubHuj9cS2fzr0dH7wN/wF+yyNmn0PZ6toWnnBfcjmqKa0Zj8k2WRIZsL?=
+ =?iso-8859-1?Q?t9Wgu7YzJmdUxaTx+gk/hQat5fgQ=3D=3D?=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:6;SRV:;IPV:NLI;SFV:SPM;H:PAXPR05MB7903.eurprd05.prod.outlook.com;PTR:;CAT:OSPM;SFS:(13230040)(218001);DIR:OUT;SFP:1501;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?iso-8859-1?Q?P5rsnXcjiTHmnCNdObneOowWiyhXcYMXRdci6fZURANaJeH0i43cEg8a+p?=
+ =?iso-8859-1?Q?M81sMLM5IoYkADDQRW29L4IruAilqMI6bUANP7ju2xPIQKDFpxwXXfWJ3n?=
+ =?iso-8859-1?Q?HINPH6E221fgf9Tc2KfG44rwTYMH1k6Wv3Ma/7BJ/inYLctOmqJEU9cB9d?=
+ =?iso-8859-1?Q?czBjb7ykNxD3nTsNEQi5ivOkzQ40sTeH3RlKoieIQt5Hg8fwZFXdrOi0DV?=
+ =?iso-8859-1?Q?hKkJlp//ECtykYt67+raeIUEGyx2ZWNVL0x0F1rb8+4e4o+p/tqPqZm9Bi?=
+ =?iso-8859-1?Q?ZUwHRvBVTy63caqDLbva4XkYlSJ3ie9ntGMc1lxttlsY2dw1L6fdfJrKoD?=
+ =?iso-8859-1?Q?X5kF8DyCj6TNGEANsa+ii1LJKkU3X3TibpseodcEH9t8F+FOUuZO4w3myB?=
+ =?iso-8859-1?Q?57oi/XuFfiFiymjLh8UFap5KHo2k2r7l5pJO3ivbR4CvooDcVtqsxxV//j?=
+ =?iso-8859-1?Q?dWZP1QujwMJ6eOzqx3B5I3bM351w4kzzROuJoFoBXLMeXXkdfHRpOf+5FP?=
+ =?iso-8859-1?Q?wipyfyBw19K4lStCmZzHzQyq6AJSvKzxEwr7tHDyJ5ptUYAzVEKpg2KWTC?=
+ =?iso-8859-1?Q?FnugqNl2JatRqU5g15TmpPCfCZVHnfecsY7fbg5/jGyllm0rmR164hB3Ex?=
+ =?iso-8859-1?Q?YOnB9ICawXOZoHKGi5o5lzo2Bgo9NKtUWnW8iwofB8g4OWtK9fmj/sMewV?=
+ =?iso-8859-1?Q?MIS1xi10aoVDgQas4D3uuNUzMab4M2LSSPUsTOHOrZXrG6d2X+UHRnORxV?=
+ =?iso-8859-1?Q?wtw5MAVKsZ4sebUAIxRtgd1p7fs6cYKaD0FEtMBAXf61K9SAF9a7PdmdBR?=
+ =?iso-8859-1?Q?JKtyquVIAbpge7iSN63cZQNXusMdIg0oaGo4HIP8B4B7ZrGyh3Impor7sQ?=
+ =?iso-8859-1?Q?CCVA2zvAPOg/zFM5MTGZKyb4SKT3WYpJXlFd926OEJLlQcCjjGrYHlzru6?=
+ =?iso-8859-1?Q?0F+MsR3iay8Eg0aajk0SswDDWCxRg0E0GTeTc97naH0VvnMnUb0soRgOnb?=
+ =?iso-8859-1?Q?VGu7GsITFrUxTMEYBO6x+qsLkP0QkpGC0wAA1oSlkVrxu/VdEsnFJGjyh3?=
+ =?iso-8859-1?Q?LFuwPicyUbqoOzZO8GQMGGwgxDSbCfB76ao5HU6Ja7n9SgInriF4X0H+ql?=
+ =?iso-8859-1?Q?ulZluqbUWqU51wGsahL933IDXeCSOt9wcUJTuU6tcJif7IJ2WecgdVOs6H?=
+ =?iso-8859-1?Q?/+Fcj4XdI6wHbITHLtkuxlmGKSoLjj+Cml7i+m1rrPxZ0OlJT44D1YMaiy?=
+ =?iso-8859-1?Q?njKTiqgqEkRwqb33hk8UBJGl9M94W7D7hInNNdVtEVlgn+PP5ouB7M+QVR?=
+ =?iso-8859-1?Q?Ln+fShxpDg/KjZgxBJlVyfARxfCUzVDxI9GiHEZEi6iavQLvcMyNcFhD3J?=
+ =?iso-8859-1?Q?IoCI9W2RYl3ZsA93IMaWXuN9G1DPM+fv4OosufnA3AwXdHBTzq0EyCm9Nm?=
+ =?iso-8859-1?Q?YkbocKM15y1uIRpO1dquIPYHYSkG156GAJOj1spwt53kjiDnD/HTghdqR6?=
+ =?iso-8859-1?Q?s2kzVipSfc6aHk5Oqz7NFXq/RDl1xGT+thwn3yVUthFCrNpPbmyPovlXSF?=
+ =?iso-8859-1?Q?Wkq+UdCsGA5UsRCtfsSIiq6pzjUB8RJUollwZD7DzRmjeilY1XsizODcWp?=
+ =?iso-8859-1?Q?pqbyzQlCAFWrnoDDexlhj1V1D0zykD+p8ztaB+8A4NiEf4Reiao29DB/re?=
+ =?iso-8859-1?Q?AAuAwtCw95MNDq7VT6FOscrJcXUccq7NN/TqV6+d?=
+Content-Type: multipart/alternative;
+	boundary="_000_PAXPR05MB790320FC090832CE6E682462BEBC2PAXPR05MB7903eurp_"
+MIME-Version: 1.0
+X-OriginatorOrg: students.ephec.be
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR05MB7903.eurprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: cf98f98e-1895-4e6b-f3af-08dd7dedf955
+X-MS-Exchange-CrossTenant-originalarrivaltime: 17 Apr 2025 20:25:19.9970
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 21936fc0-be19-4e1b-ad89-4def5c23b4cb
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: doMtU+dHyH59D2mHx5/tAHwmmlu/QhBUa8ZUKv9rN7qAOdRxML+K+E0aHP3Mxva2hNPZPD1PBcHdb5y6NOskDMVMxyMSefY7lLu8ZJKCsqU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR05MB10895
+
+--_000_PAXPR05MB790320FC090832CE6E682462BEBC2PAXPR05MB7903eurp_
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+XJS*C4JDBQADN1.NSBN3*2IDNEN*GTUBE-STANDARD-ANTI-UBE-TEST-EMAIL*C.34X
+
+
+--_000_PAXPR05MB790320FC090832CE6E682462BEBC2PAXPR05MB7903eurp_
+Content-Type: text/html; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
+1">
+<style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin-bo=
+ttom:0;} </style>
+</head>
+<body dir=3D"ltr">
+<pre><div class=3D"elementToProof" style=3D"text-align: left; text-indent: =
+0px; white-space: pre-wrap; font-family: Aptos, Aptos_EmbeddedFont, Aptos_M=
+SFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0=
+, 0, 0);">XJS*C4JDBQADN1.NSBN3*2IDNEN*GTUBE-STANDARD-ANTI-UBE-TEST-EMAIL*C.=
+34X</div></pre>
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+<br>
+</div>
+</body>
+</html>
+
+--_000_PAXPR05MB790320FC090832CE6E682462BEBC2PAXPR05MB7903eurp_--

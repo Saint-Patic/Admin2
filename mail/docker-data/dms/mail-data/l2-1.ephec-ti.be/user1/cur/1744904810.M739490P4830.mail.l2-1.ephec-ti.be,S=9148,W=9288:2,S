@@ -1,0 +1,140 @@
+Return-Path: <alexis.demarcq@hotmail.com>
+Delivered-To: user1@l2-1.ephec-ti.be
+Received: from mail.l2-1.ephec-ti.be
+	by mail.l2-1.ephec-ti.be with LMTP
+	id bp/mK2oiAWjeEgAA1srq+w
+	(envelope-from <alexis.demarcq@hotmail.com>)
+	for <user1@l2-1.ephec-ti.be>; Thu, 17 Apr 2025 15:46:50 +0000
+Received: from localhost (localhost [127.0.0.1])
+	by mail.l2-1.ephec-ti.be (Postfix) with ESMTP id A5E4E429AB
+	for <user1@l2-1.ephec-ti.be>; Thu, 17 Apr 2025 15:46:50 +0000 (UTC)
+Authentication-Results: mail.l2-1.ephec-ti.be; dmarc=pass (p=none dis=none) header.from=hotmail.com
+Authentication-Results: mail.l2-1.ephec-ti.be;
+	dkim=pass (2048-bit key; unprotected) header.d=hotmail.com header.i=@hotmail.com header.a=rsa-sha256 header.s=selector1 header.b=g4rqTCpp;
+	dkim-atps=neutral
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=40.92.91.15; helo=eur05-am6-obe.outbound.protection.outlook.com; envelope-from=alexis.demarcq@hotmail.com; receiver=l2-1.ephec-ti.be 
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com (mail-am6eur05olkn2015.outbound.protection.outlook.com [40.92.91.15])
+	by mail.l2-1.ephec-ti.be (Postfix) with ESMTPS id 37A20429A4
+	for <user1@l2-1.ephec-ti.be>; Thu, 17 Apr 2025 15:46:49 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=RUHuMi2dD9cOui+SB9bO+RWf66CePABpOoOFEHmRz+p9M8YTsCAWSo6c1l2LxHNlb38W1SdJWsAZlgxKTnH+jl3hcaBKXaus8J8HH5/LBW1pePK/ZMeqAVEe9KBUwEQtF5JjaQ8/xG3CyZtb1dr7S3fub7BxqE7Iid3LkRe6sTefw22n0JoYhPP6lrYgYsAoQsbu9q7lO8EyKjjpK7j8LsGYkuPrv1M/TWL9MmZIiOJmoAUEoF5UZf27YSiOuw6ZaceHeGXYf25RxheYBn9aCXjeyzqh0yQZNhQRJRpi49dc1fLnI8cdzE0FzYpTf1tmmGZcd7deDaN0f26QZhuMNQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=VnnwGyl9WpSlk48lC7GCKwtejAqnlDLaisPZAiRAeQY=;
+ b=V5w0+EIAA/OpM0LEEYjr/cWEn+V4qu5yIZEWVau42h+Rjq1/3XeVF3oHw8DyL+mKUcaHdbtn1EaADyuHXs1iVQyPPMRwATwEJopIxF4gKoV5nTpP5nQXnHO1YsXPMgQ6HBx3kNM9iVM235t5lKzMi5wCDMCJcZqAzTZ5ph/dCa4MEzajQp1M3T9HZnsmMKZToRD0e6tniG/g5LzwSFofHSBqwrRYZtGQztVyjyO+kbrRVf5bO+zk6Nn8WvQ2WdIlSYIhLBK1LG+X4Dx8iTb18aOs2PwUvsdlqNnNq3QMP9riEbFQpDi8D/JkHA8D4wIkMqNiyoJrdNEiO7xBOmUGZg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=VnnwGyl9WpSlk48lC7GCKwtejAqnlDLaisPZAiRAeQY=;
+ b=g4rqTCppFhMhqIcHiRAJCNSP2Pj//XcOjseKID7vy9P9bT+vrDsgFjbBAFKx9FnHem/GtR+mTGgOoVippsyjEdeB2vy4DGbEZJALm1XccGe67znsoPdwzXCf9nkJB27TTBFShrifWAXcSbW5w/eQbsCOy1yzWuBQ+JhddeLH2em3Ze22NVIOQiIi0mpasY7sMog2nzbAvvhhWpnw6grc7XIb9nNfK3wMbAXbaTlkyvIzpzzRt/rE90maegXM/sEVXQFFc8m2YcCLbU3DGtd+TWeu9dA6KC6pfx9e9MzP87HZuZ41fu643Hb4A0/K+ekey1QFngdSyYy3vrDhnd2uaw==
+Received: from AS8P250MB0347.EURP250.PROD.OUTLOOK.COM (2603:10a6:20b:37e::11)
+ by DB4P250MB0959.EURP250.PROD.OUTLOOK.COM (2603:10a6:10:3f9::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8655.16; Thu, 17 Apr
+ 2025 15:46:42 +0000
+Received: from AS8P250MB0347.EURP250.PROD.OUTLOOK.COM
+ ([fe80::870e:87ff:4893:7589]) by AS8P250MB0347.EURP250.PROD.OUTLOOK.COM
+ ([fe80::870e:87ff:4893:7589%6]) with mapi id 15.20.8655.025; Thu, 17 Apr 2025
+ 15:46:42 +0000
+From: Alexis Demarcq <alexis.demarcq@hotmail.com>
+To: "user1@l2-1.ephec-ti.be" <user1@l2-1.ephec-ti.be>
+Subject: Test admin2 via autre domaine
+Thread-Topic: Test admin2 via autre domaine
+Thread-Index: AQHbr6/KqkSnZ1K2ak2BMjnLgIe0vA==
+Date: Thu, 17 Apr 2025 15:46:42 +0000
+Message-ID:
+ <AS8P250MB0347043F119AA7D7A62E71A486BC2@AS8P250MB0347.EURP250.PROD.OUTLOOK.COM>
+Accept-Language: fr-BE, fr-FR, en-US
+Content-Language: fr-FR
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: AS8P250MB0347:EE_|DB4P250MB0959:EE_
+x-ms-office365-filtering-correlation-id: 2ddf987b-582b-42d4-3bbd-08dd7dc70cf7
+x-microsoft-antispam:
+ BCL:0;ARA:14566002|461199028|15080799006|8060799006|19110799003|7092599003|8062599003|14030799003|440099028|3412199025|102099032;
+x-microsoft-antispam-message-info:
+ =?us-ascii?Q?t1lTad8HFw86TsJKidq1lfFzrRymz6Qz1HW2frD1ChqJYLUtCp1mUiVD2Imu?=
+ =?us-ascii?Q?4JxGNjfVv87EqWDrV9b+TmwpNloa0B6QhlQv9A1MTIl2Do1JZl7sWUElyrLO?=
+ =?us-ascii?Q?LPxlP5ScNDoS+7r0g/p+MqJCPoqD4Hn4oRIpaFuUifEVPV1wRg0CwJdPA/fk?=
+ =?us-ascii?Q?vojE6snuOS5g0aB/Goa0XLTtKF5jVKf+hM4fF4MFiJP+1uNqvXPHmaksnERc?=
+ =?us-ascii?Q?OKh5/lpfz72Rk6Hv1Ubd0xL2hbWd1pkMxxQUwgYPuo3KQEmlrLzo8Z3Gw0R0?=
+ =?us-ascii?Q?3xSRrgLjWRMpGIlLLP+UL+DscFkN5S8p0FhQEmgcF/Jr60tMI4B8uiq5ELDE?=
+ =?us-ascii?Q?2FL5L/ureUhige1NU53iywziIYGOlgZepI28s0bonV0hgXAasFro7HGmPNGW?=
+ =?us-ascii?Q?VdlUX6nJrcxkrJ6GjFi8JSelLwVViI5fU7G4wV8ZIo4/R5guzA1JWPYnnElC?=
+ =?us-ascii?Q?cj1yyIDOGzidW8nsLypjx1v0ggGkI8WjXxhcKmA8s28icu75ZCn/yIFWrSuf?=
+ =?us-ascii?Q?lllQBfCUsRd3wDvdmg8g05FlDAy7DiKqJfcGtoH/LbhT2BbnddXasE9s4Tsp?=
+ =?us-ascii?Q?cyLUgOod1ZEkEwNVmtzXtda3cYoC0KAZ4vC34impvwW0dNHoxMhDXOqxdjD3?=
+ =?us-ascii?Q?/dzJ5rvXWFRXw/HCUN4lYRBh0nSmnXZjePfoyeX69W/GzZtGIff4iEkPJ66N?=
+ =?us-ascii?Q?xWUgCxG4AY4kpKHdsM6FpN95V3DaklZuVp5Ms19AfIPD6ZAoPk+cM1OuCRbf?=
+ =?us-ascii?Q?2AeL/QcAqkMesB3XgOXkD1YLdQkutdKyLUrCYBuZ9POIYx8inGa3+ZC2V75t?=
+ =?us-ascii?Q?9lRE0jmowrX39Qgd0n41QQv++Fq5vMjpmiUpMnqr3+AL3ugygjPF9k0ARRaQ?=
+ =?us-ascii?Q?KI+Ip88ppMYruNtVEwVHRNvK04mwpWF4Lgt1rS0x8D0tDEVdUrIPJv+olX0x?=
+ =?us-ascii?Q?vUzUdE84MCqOFno0XG0ex7ftE+K0YgganssSVTwwtR/dkidQUZYr8RbtcSb9?=
+ =?us-ascii?Q?KvE+V6/3/O1oj44LhyT6IaW1YkXATPaNhyHfInyHZ2ibeZUswrI0OBjiP/yb?=
+ =?us-ascii?Q?fBH8osVdeHwq4ku+XYP3TVM7zF85XVUzC9xhQtclrchAkHl1XMrRgGY0aLaK?=
+ =?us-ascii?Q?h/lsySFnagd2B15MCjMjGeq17a8F2tXfjQ=3D=3D?=
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?us-ascii?Q?ta9UKYuEi0Xg7K/7YhHnGWDjAP7o28FPBxXuLGE4BeDw4ks56xp2zr2UWYI+?=
+ =?us-ascii?Q?ECV/at7CIWYyf/RhWrF3LXDSiVIvI169qIKVJKPw0eUPzQi2nLkPBKVhoStI?=
+ =?us-ascii?Q?mwPpDV3Vdm9GNB0QF4pGmc3PkXQPOXPSH86qhLp0+veRTIykIFf4k4y2z8Hk?=
+ =?us-ascii?Q?VwyJhr3Fn3kl6NMwGKIQKsS5ePF2UX2fAHcAEdcQQt5951esRfMxPRzDodU3?=
+ =?us-ascii?Q?ewTHTcspEuAcSqiUiGXuYdsWXC2kUS7Bnp3TOs1rW0E4F3iR7wV/H7agdrmG?=
+ =?us-ascii?Q?Z24JAIq38+iUPmRXTbd+bb5dKnpv32MG2eJgnXW47ng/N6nFQHh4nNZae8GX?=
+ =?us-ascii?Q?WB44sZlY1HUL8ZhEbEW1xDZbPpM9taXplcaJQvzoCAHI+6u6aVgNldi7WukH?=
+ =?us-ascii?Q?ZKuFgRxeOp6PuAezNBQ3DizMAv5JGzVUChMdBtNFog1hjn6XUqPPefzz2LLo?=
+ =?us-ascii?Q?ewL8HgeU+HTt3kwtPkjFNL39iO6HhJulbb5DlQZVKJhxpHaMibYIlGhwHV8z?=
+ =?us-ascii?Q?i0QG9oTU0H+C9thXdgvsYE7/4C176xIjsmC0aC9b6Oes6bNjCd6hL3H8A//f?=
+ =?us-ascii?Q?yngB7p+GntM8D4JDqnFMGVCBC6eU8HE7VfYFIqB54WM+0lOC+GlHJQL897SL?=
+ =?us-ascii?Q?7IYBDNsgWPN9ODVVF2T2q73g5SQipsDY3c9F6yiKxNxHbj76etJF/t7INLHX?=
+ =?us-ascii?Q?gRj/7SgTCUe0D1NzHmotytILM9oWReVL0EC6xGYfUbZ6Axjinx3o6+uSqQuK?=
+ =?us-ascii?Q?tPOoyW3fZLCdY2Rhvlmxla3EmDi0lfpbJDSQ5EfhBCCijCUaRFI6xhKDGaEt?=
+ =?us-ascii?Q?N3W1q4K58ee2IxLHlK9jdWK09RjLHy07VMA1/xz3IyHVkDb1oZE2INgqyvTG?=
+ =?us-ascii?Q?4wrL907Q3HVPBFneX/xuul+0MFSLRPuMTHioyHwrL8zV5QunE3/u3NqcpkZ0?=
+ =?us-ascii?Q?FmLKzO8gDOMGjvu3YNa+rRFy0wCP+JCtwuyKwyjhnPHQJjXAVCJ381r9Z4lR?=
+ =?us-ascii?Q?P1nAq7JcldEjyp+94Gw0doI9srTmDCWHvqiUxEtGZQjg22oi4L29DRDR/qVu?=
+ =?us-ascii?Q?mDxO3HWodq1BwDmd8BODbHV/Ngdy4LLp+2GWryzGMpRh1BLs2De/yXLGCTQN?=
+ =?us-ascii?Q?4hs5/Pl2AzUaxwtYkSm3MSmw7glKlFEwu1V158JtT/dyKj2teUqLIthIHxq1?=
+ =?us-ascii?Q?hZ8lsvZ54OP5azDr697s9BhLP/piNibA8zeTEgvuJOyzO5FmS7usvOwtk3rs?=
+ =?us-ascii?Q?MHtJI/Lc0XYAj4jHabsWzo8WsHpIlVCJU6+ueZ4tMDffbhb2bfBxVX7z4ngM?=
+ =?us-ascii?Q?jPIry5RxPZLLo86XVwsNCSzh2YHSQKodjd7kzHk0LFyyRg=3D=3D?=
+Content-Type: multipart/alternative;
+	boundary="_000_AS8P250MB0347043F119AA7D7A62E71A486BC2AS8P250MB0347EURP_"
+MIME-Version: 1.0
+X-OriginatorOrg: sct-15-20-7784-11-msonline-outlook-95b76.templateTenant
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: AS8P250MB0347.EURP250.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2ddf987b-582b-42d4-3bbd-08dd7dc70cf7
+X-MS-Exchange-CrossTenant-originalarrivaltime: 17 Apr 2025 15:46:42.5590
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-rms-persistedconsumerorg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB4P250MB0959
+
+--_000_AS8P250MB0347043F119AA7D7A62E71A486BC2AS8P250MB0347EURP_
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+Coucou user1, je viens d'un autre domaine
+
+--_000_AS8P250MB0347043F119AA7D7A62E71A486BC2AS8P250MB0347EURP_
+Content-Type: text/html; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
+>
+</head>
+<body>
+<div dir=3D"ltr">Coucou user1, je viens d'un autre domaine</div>
+</body>
+</html>
+
+--_000_AS8P250MB0347043F119AA7D7A62E71A486BC2AS8P250MB0347EURP_--
